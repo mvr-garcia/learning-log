@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.http import Http404
 from .models import Topic, Entry
 from .forms import TopicForm, EntryForm
@@ -16,10 +17,14 @@ def index(request):
     return render(request, 'learning_logs/index.html')
 
 
-@login_required()
 def topics(request):
     """Show all topics"""
-    topics = Topic.objects.filter(owner=request.user).order_by('date_added')
+    # If the user is authenticated, the user's topic and public topics will be shown
+    if request.user.is_authenticated:
+        topics = Topic.objects.filter(Q(public=True) | Q(owner=request.user)).order_by('date_added')
+    # If not, only the public topics will be shown
+    else:
+        topics = Topic.objects.filter(public=True).order_by('date_added')
     context = {'topics': topics}
     return render(request, 'learning_logs/topics.html', context)
 
@@ -61,7 +66,7 @@ def new_topic(request):
 @login_required()
 def new_entry(request, topic_id):
     """Add a new entry for a particular topic."""
-    topic = Topic.objects.get(id=topic_id)
+    topic = get_object_or_404(Topic, id=topic_id)
 
     # Protect the page. Only the owner must have access
     check_topic_owner(topic, request)
@@ -86,7 +91,7 @@ def new_entry(request, topic_id):
 @login_required()
 def edit_entry(request, entry_id):
     """Edit an existing entry."""
-    entry = Entry.objects.get(id=entry_id)
+    entry = get_object_or_404(Entry, id=entry_id)
     topic = entry.topic
     # Protect the page. Only the owner must have access
     check_topic_owner(topic, request)
