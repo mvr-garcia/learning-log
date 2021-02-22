@@ -17,13 +17,13 @@ Author: [Eric Matthes](https://ehmatthes.github.io/pcc_2e/)
 ![](screenshots/1.png)  
 ![](screenshots/2.png)
 - Mobile Screenshot  
-![](screenshots/3.png)
+![](screenshots/3.png)  
 ![](screenshots/4.png)
 
 ## Live Demo
 
 ![](screenshots/heroku.png)  
-The project is live on Heroku, to visit click on [here](https://dashboard.heroku.com/apps/daily-learn)
+The project is live on Heroku, to visit click on [here](https://daily-learn.herokuapp.com/).
 
 ## Getting started
 
