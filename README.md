@@ -11,7 +11,7 @@ This project is the result of the tasks performed during the study of Python Cra
 Book: [Python Crash Course, Second Edition](http://www.nostarch.com/pythoncrashcourse/)  
 Author: [Eric Matthes](https://ehmatthes.github.io/pcc_2e/)
 
-## Screeshots
+## Screenshots
 
 - Desktop Screenshot  
 ![](screenshots/1.png)  
